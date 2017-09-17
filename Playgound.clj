@@ -189,3 +189,66 @@
 (let [x ((fn [a] (+ 1 a)) 2)]
     (println x))
 
+(defn sss
+  ([x] (println (+ x)))
+  ([x y] (println(+ x y))))
+
+(sss 1)
+
+(sss 1 2)
+
+(def sta (fn sss
+           ([y] (sss y))
+           ([y z] (sss y z))))
+
+(sta 1 2)
+; error! StackOverflowError 因为这个 sss 并不是前面定义的 sss 引用，而是自身别名
+
+(def sta2 (fn adder-self-reference
+           ([y] (adder-self-reference y 1))
+           ([y z] (+ y z))))
+
+(sta2 1 3)
+
+(letfn [(odd? [n]
+          (even? (dec n)))
+        (even? [n]
+          (or (zero? n)
+              (odd? (dec n))))]
+  (odd? 11))
+
+(defn concat-rest
+  [x & rest]
+  (apply str (butlast rest)))
+
+(concat-rest 1 2 3 4 5)
+
+(defn make-user
+  [& [user-id a]]
+  (println user-id a)
+  {:user-id (or user-id
+                (str (java.util.UUID/randomUUID)))})
+
+(make-user)
+
+(make-user "aaa" "bbb")
+
+(make-user "aaa" "bbb" :user-id "ccc")
+
+(defn make-user2
+  [username & {:keys [email join-date]
+               :or {join-date (java.util.Date.)}}]
+  {:username username
+   :join-date join-date
+   :email email
+   :exp-date (java.util.Date. (long ( + 2.592e9 (.getTime join-date))))})
+
+(make-user2 "Boddy")
+
+(make-user2 "Boddy"
+            :join-date (java.util.Date. 111 0 1)
+            :email "boddy@2.com")
+
+(def tt (#(do
+            (println "sss")
+            (Math/pow %1 %2)) 2 4))
