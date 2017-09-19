@@ -252,3 +252,46 @@
 (def tt (#(do
             (println "sss")
             (Math/pow %1 %2)) 2 4))
+
+; if | conditional
+(if "hi" \t)
+
+(if 111 \t)
+
+(if nil "aa" "bb")
+
+(if false "aa" "bb")
+
+(if (not true) "aa" "bb")
+
+(if (not true) "aa")
+
+(if true
+  (do
+    (println "aa")
+    (println "ax"))
+  (println "bb"))
+
+(loop [x 5]
+  (if (neg? x)
+    x
+    (recur (dec x))))
+
+(def xx 123)
+
+(conj (sorted-set) "D" "C" "S" "A")
+
+(def score {"A" 100})
+
+(assoc score "A" 911)
+
+(dissoc score "AA")
+
+(defn print-name []
+  (println "Hello, " name)
+  (let [name "Bob"]))
+(print-name)
+
+(def sss (* (* 1.4 (Math/pow 6000 3)) (Math/pow 100000 3)))
+
+(* (Math/pow (/ (* 82 (* 1.5 (Math/pow 10 8))) 6000) 3) sss)
