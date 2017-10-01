@@ -295,3 +295,14 @@
 (def sss (* (* 1.4 (Math/pow 6000 3)) (Math/pow 100000 3)))
 
 (* (Math/pow (/ (* 82 (* 1.5 (Math/pow 10 8))) 6000) 3) sss)
+
+(map #(* %1 %2) [1 2 3] [1 2 3])
+
+(map (fn [x & r] (* x (apply + r))) [1 2 3] [1 2 3] [1 2 3])
+
+(map #(* % (apply * %&)) [1 2 3] [1 2 3] [1 2 3] [1 2 3])
+
+(def ano-lc clojure.string/lower-case)
+
+(ano-lc "Your Foo")
+
